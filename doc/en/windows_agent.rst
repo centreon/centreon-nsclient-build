@@ -5,11 +5,11 @@ NSClient++ Windows Agent HOWTO
 Overview
 --------
 
-NSClient++ is a free monitoring agent available on http://www.nsclient.org/
+NSClient++ is a free monitoring agent available on http://www.nsclient.org/.
 This project consists in a packaging of NSClient++ to make it work easily with plugins provided by Centreon, used on Microsoft Windows plateform.
 
 .. note::
-   We are using version 0.4.3.x of NSClient++. The archive is included in our own archive for the build.
+   We are using version 0.5.0.x of NSClient++. The archive is included in our own archive for the build.
 
 The overall principle is to compile existing Perl plugins available in Centreon Plugins project (https://github.com/centreon/centreon-plugins) and configure NSClient++ to execute them on the target Windows server.
 Note that you need to install the corresponding plugins packs in Centreon so as to benefit from the commands that will communicate with NSClient++
@@ -34,7 +34,7 @@ This is the easiest way to install NSClient++ on your servers, as NSClient++ is 
 All you need to do is to select the 32bits or 64bits archive and install it on your server.
 
 .. note::
-    This is part of your CES (advanced or complete) subscription, please contact Centreon to get this installer.
+    This is part of Centreon EMS solution or Centreon IMP subscription, please contact Centreon to get this installer.
 
 Build your own executable
 -------------------------
@@ -44,7 +44,7 @@ First you need to compile a native binary called "centreon_plugins.exe" with the
 Then you need to build the NSClient++ archive including this binary.
 
 .. note::
-    This is part of your CES (advanced or complete) subscription, please contact Centreon to get the archive allowing you to build the archive.
+    This is part of Centreon EMS solution or Centreon IMP subscription, please contact Centreon to get the archive allowing you to build the archive.
 
 Build the command 
 =================

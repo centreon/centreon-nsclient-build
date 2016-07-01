@@ -5,13 +5,13 @@ Guide pour l'agent Windows NSClient+
 Généralités
 -----------
 
-NSClient++ est un agent de supervision gratuit disponible sur le site web suivant : http://www.nsclient.org/
+NSClient++ est un agent de supervision gratuit disponible sur le site web suivant : http://www.nsclient.org.
 Ce projet consiste à réaliser un paquet de NSClient++ afin de permettre une meilleure utilisation sur des plate-formes Microsoft Windows avec les sondes fournies par Centreon.
 
 .. note::
-   La version de NSClient++ utilisée est la version 0.4.3.x. L'archive de cette version est incluse dans notre propre archive utilisée pour la construction des paquets.
+    La version de NSClient++ utilisée est la version 0.5.0.x. L'archive de cette version est incluse dans notre propre archive utilisée pour la construction des paquets.
 
-Le principe est de compiler les sondes Perl disponible dans le projet Centreon Plugins (https://github.com/centreon/centreon-plugins) et configurer NSClient++ pour les exécuter sur le serveur Windows cible.
+Le principe est de compiler les sondes Perl disponibles dans le projet Centreon Plugins (https://github.com/centreon/centreon-plugins) et configurer NSClient++ pour les exécuter sur le serveur Windows cible.
 Vous devez installer le Plugin Pack correspondant dans Centreon pour bénéficier des commandes compatibles pour communiquer avec NSClient++.
 
 Pour installer NSClient++ sur vos serveurs Windows vous avez deux possibilités :
@@ -34,8 +34,7 @@ Cette méthode est la plus simple à mettre oeuvre pour installer NSClient++ sur
 Le seul choix réside dans l'architecture adéquate (32bits ou 64bits) pour l'archive avant de l'installer sur votre serveur.
 
 .. note::
-
-    Cet agent fait partie des versions de CES soumises à contribution (advanced ou complete). Vous pouvez contacter Centreon pour obtenir plus d'informations.
+    Cet agent fait partie de l'offre Centreon EMS ou s'une souscription Centreon IMP. Vous pouvez contacter Centreon pour obtenir plus d'informations.
 
 Construction d'un exécutable personnalisé
 -----------------------------------------
@@ -45,7 +44,7 @@ Premièrement vous devez compiler le binaire nommé "centreon_plugins.exe" avec 
 Puis vous devez construire l'archive NSClient++ qui incluera ce binaire.
 
 .. note::
-    Les outils nécessaires pour générer votre propre archive font partie des versions de CES soumises à contribution (advanced ou complete). Vous pouvez contacter Centreon pour obtenir plus d'informations
+    Les outils nécessaires pour générer votre propre archive font partie de l'offre Centreon EMS ou s'une souscription Centreon IMP. Vous pouvez contacter Centreon pour obtenir plus d'informations
 
 Génération de la sonde
 ======================
