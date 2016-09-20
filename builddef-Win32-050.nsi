@@ -31,10 +31,10 @@ ${unStrStrAdv}
 ;These constants specify the program
 !define PRODUCT_NAME "centreon-nsclient"
 !define PRODUCT_VERSION "1.0"
-!define PACKAGE_VERSION "1"
+!define PACKAGE_VERSION "2"
 !define NSCLIENT_VERSION "050"
 !define PRODUCT_ICON "favicon_centreon.ico"
-!define MSI_NSCLIENT "NSCP-0.5.0.48-Win32.msi"
+!define MSI_NSCLIENT "NSCP-0.5.0.62-Win32.msi"
 
 ;These constants specify the installation directories
 !define INSTALL_DIR "$PROGRAMFILES\${PRODUCT_NAME}" ;$PROGRAMFILES is a constant: no ${}
