@@ -8,6 +8,9 @@ Centreon NSClient++
 
 This is the documentation for the NSClient++ connector packaged by Centreon as part of the Plugin Packs
 
+Centreon NSClient++ is based on NSClient++ agent. The official documentation is 
+`available here <https://docs.nsclient.org/0.5.0/>`_.
+
 Contents:
 
 .. toctree::
