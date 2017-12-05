@@ -34,7 +34,7 @@ ${unStrStrAdv}
 !define PACKAGE_VERSION "2"
 !define NSCLIENT_VERSION "051"
 !define PRODUCT_ICON "favicon_centreon.ico"
-!define MSI_NSCLIENT "NSCP-0.5.1.44-Win32.msi"
+!define MSI_NSCLIENT "NSCP-0.5.1.46-Win32.msi"
 
 ;These constants specify the installation directories
 !define INSTALL_DIR "$PROGRAMFILES\${PRODUCT_NAME}" ;$PROGRAMFILES is a constant: no ${}
