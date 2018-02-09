@@ -182,7 +182,7 @@ Section "-Prerequisites" seq_Prereq
 	;--------------
 	DetailPrint "- $Application installation."
 	File "Prerequisites\${MSI_NSCLIENT}"
-	ExecWait 'msiexec /qr /i "$PrereqDir\${MSI_NSCLIENT}" /quiet INSTALLLOCATION="$INSTDIR\NSClient++\" CONF_CHECKS=1 CONF_NRPE=1 CONF_CAN_CHANGE=1' $0
+	ExecWait 'msiexec /norestart /qr /i "$PrereqDir\${MSI_NSCLIENT}" /quiet INSTALLLOCATION="$INSTDIR\NSClient++\" CONF_CHECKS=1 CONF_NRPE=1 CONF_CAN_CHANGE=1' $0
 	DetailPrint "Some program returned $0"
   
 	;install files
@@ -222,7 +222,7 @@ Section "${PRODUCT_NAME}" sec_App
   StrCmp $option_nouninstall 1 0 +4
   ClearErrors
   ReadRegDWORD $0 HKLM "${REG_CININSTALL}" "install"
-  ; La cle existe. On a dÈj‡ Ècrit donc
+  ; La cle existe. On a d√©j√† √©crit donc
   IfErrors 0 centreon_end
   
   ;install monitoring
