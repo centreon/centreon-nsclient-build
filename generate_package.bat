@@ -22,8 +22,8 @@ SET LOGFILE=%~n0.log
 SET ZIP=..\bin\7zip\7za.exe
 SET NSIS=.\bin\nsis\makensis.exe
 SET RESSOURCES=.\ressources
-SET SETUP32_044=builddef-Win32-052.nsi
-SET SETUP64_044=builddef-x64-052.nsi
+SET SETUP32_044=builddef-Win32.nsi
+SET SETUP64_044=builddef-x64.nsi
 
 :: Copie scripts 32
 xcopy scripts\win32 build\scripts /E /S /Y
@@ -36,7 +36,7 @@ Echo -----------------------------------
 Echo.
 
 del /F /Q Prerequisites\nsclient-resource*
-copy resources\nsclient-051.ini build\nsclient.ini /Y
+copy resources\nsclient.ini build\nsclient.ini /Y
 chdir build
 %ZIP% a -tzip ..\Prerequisites\nsclient-resource.zip .\ -r
 chdir ..
@@ -55,7 +55,7 @@ Echo -----------------------------------
 Echo.
 
 del /F /Q Prerequisites\nsclient-resource*
-copy resources\nsclient-051.ini build\nsclient.ini /Y
+copy resources\nsclient.ini build\nsclient.ini /Y
 chdir build
 %ZIP% a -tzip ..\Prerequisites\nsclient-resource.zip .\ -r
 chdir ..
