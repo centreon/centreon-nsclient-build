@@ -1,0 +1,3 @@
+[submodule "centreon-plugins"]
+	path = centreon-plugins
+	url = https://github.com/centreon/centreon-plugins
