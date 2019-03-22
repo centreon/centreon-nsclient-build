@@ -81,8 +81,10 @@ cmd /C %PERL_INSTALL_DIR%\perl\site\bin\pp --lib=centreon-plugins\ -o centreon_p
 -M XML::LibXML::SAX ^
 -M Net::FTPSSL ^
 -M Authen::NTLM ^
+-M JSON::XS ^
 -M centreon::plugins::script ^
 -M centreon::plugins::alternative::Getopt ^
+-M centreon::common::powershell::functions ^
 -M apps::backup::netbackup::local::plugin ^
 -M apps::backup::netbackup::local::mode::dedupstatus ^
 -M apps::backup::netbackup::local::mode::drivecleaning ^
@@ -176,6 +178,15 @@ cmd /C %PERL_INSTALL_DIR%\perl\site\bin\pp --lib=centreon-plugins\ -o centreon_p
 -M apps::backup::veeam::local::mode::listjobs ^
 -M centreon::common::powershell::veeam::jobstatus ^
 -M centreon::common::powershell::veeam::listjobs ^
+-M apps::wsus::local::plugin ^
+-M apps::wsus::local::mode::computersstatus ^
+-M apps::wsus::local::mode::updatesstatus ^
+-M apps::wsus::local::mode::synchronisationstatus ^
+-M apps::wsus::local::mode::serverstatistics ^
+-M centreon::common::powershell::wsus::computersstatus ^
+-M centreon::common::powershell::wsus::updatesstatus ^
+-M centreon::common::powershell::wsus::synchronisationstatus ^
+-M centreon::common::powershell::wsus::serverstatistics ^
 --verbose
 
 pause
