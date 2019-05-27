@@ -63,7 +63,7 @@ copy /Y %PAR_PACKER_SRC%\myldr\Static.pm %PERL_INSTALL_DIR%\perl\site\lib\PAR\St
 chdir /d %~dp0
 set PAR_VERBATIM=1
 
-cmd /C %PERL_INSTALL_DIR%\perl\site\bin\pp --lib=centreon-plugins\ -o centreon_plugins.exe centreon-plugins\centreon_plugins.pl ^
+cmd /C %PERL_INSTALL_DIR%\perl\site\bin\pp --lib=centreon-plugins\ -o scripts\x64\centreon\centreon_plugins.exe centreon-plugins\centreon_plugins.pl ^
 --unicode ^
 -X IO::Socket::INET6 ^
 --link=%PERL_INSTALL_DIR%\c\bin\libxml2-2__.dll ^
@@ -183,10 +183,15 @@ cmd /C %PERL_INSTALL_DIR%\perl\site\bin\pp --lib=centreon-plugins\ -o centreon_p
 -M apps::wsus::local::mode::updatesstatus ^
 -M apps::wsus::local::mode::synchronisationstatus ^
 -M apps::wsus::local::mode::serverstatistics ^
+-M apps::sccm::local::plugin ^
+-M apps::sccm::local::mode::databasereplicationstatus ^
+-M apps::sccm::local::mode::sitestatus ^
 -M centreon::common::powershell::wsus::computersstatus ^
 -M centreon::common::powershell::wsus::updatesstatus ^
 -M centreon::common::powershell::wsus::synchronisationstatus ^
 -M centreon::common::powershell::wsus::serverstatistics ^
+-M centreon::common::powershell::sccm::databasereplicationstatus ^
+-M centreon::common::powershell::sccm::sitestatus ^
 --verbose
 
 pause
