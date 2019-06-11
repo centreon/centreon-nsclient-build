@@ -83,6 +83,10 @@ cmd /C %PERL_INSTALL_DIR%\perl\site\bin\pp --lib=centreon-plugins\ -o scripts\x6
 -M Tie::RefHash::Weak ^
 -M Win32::Job ^
 -M XML::LibXML::SAX ^
+-M apps::activedirectory::local::plugin ^
+-M apps::activedirectory::local::mode::dcdiag ^
+-M apps::activedirectory::local::mode::dfsrbacklog ^
+-M apps::activedirectory::local::mode::netdom ^
 -M apps::backup::netbackup::local::plugin ^
 -M apps::backup::netbackup::local::mode::dedupstatus ^
 -M apps::backup::netbackup::local::mode::drivecleaning ^
@@ -93,10 +97,6 @@ cmd /C %PERL_INSTALL_DIR%\perl\site\bin\pp --lib=centreon-plugins\ -o scripts\x6
 -M apps::backup::veeam::local::plugin ^
 -M apps::backup::veeam::local::mode::jobstatus ^
 -M apps::backup::veeam::local::mode::listjobs ^
--M apps::activedirectory::local::plugin ^
--M apps::activedirectory::local::mode::dcdiag ^
--M apps::activedirectory::local::mode::dfsrbacklog ^
--M apps::activedirectory::local::mode::netdom ^
 -M apps::centreon::local::plugin ^
 -M apps::centreon::local::mode::downtimetrap ^
 -M apps::centreon::local::mode::centreonpluginsversion ^
