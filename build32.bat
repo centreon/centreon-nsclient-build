@@ -75,6 +75,7 @@ cmd /C %PERL_INSTALL_DIR%\perl\site\bin\pp --lib=centreon-plugins\ -o scripts\wi
 --link=%PERL_INSTALL_DIR%\c\bin\libcrypto-1_1_.dll ^
 --link=%PERL_INSTALL_DIR%\c\bin\libssl-1_1_.dll ^
 -M Authen::NTLM ^
+-M Date::Manip ^
 -M Email::Send::SMTP::Gmail ^
 -M HTTP::ProxyPAC ^
 -M IO::Socket::SSL ^
