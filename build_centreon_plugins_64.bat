@@ -1,69 +1,69 @@
-@echo off
+@ECHO OFF
+
+SET VERSION_PLUGIN=20190704
 
 set PERL_INSTALL_DIR=C:\Strawberry
-set ICO_FILE=centreon.ico
-set RC_FILE=centreon.rc
+SET ICO_FILE=resources\centreon.ico
+SET RC_FILE=centreon.rc
 
-chdir /d %~dp0
-
-for /f "tokens=4 delims= " %%i in ('type centreon-plugins\centreon\plugins\script.pm ^| findstr global_version ^| findstr my') do set "VERSION_PLUGIN=%%i"
-set VERSION_PLUGIN=%VERSION_PLUGIN:~0,8%
+CHDIR /d %~dp0
 
 (
-echo #define PP_MANIFEST_FILEFLAGS 0
-echo #include ^<windows.h^>
-echo.
-echo CREATEPROCESS_MANIFEST_RESOURCE_ID RT_MANIFEST "winres\\pp.manifest"
-echo.
-echo VS_VERSION_INFO VERSIONINFO
-echo    FILEVERSION        0,0,0,0
-echo    PRODUCTVERSION     0,0,0,0
-echo    FILEFLAGSMASK      VS_FFI_FILEFLAGSMASK
-echo    FILEFLAGS          PP_MANIFEST_FILEFLAGS
-echo    FILEOS             VOS_NT_WINDOWS32
-echo    FILETYPE           VFT_APP
-echo    FILESUBTYPE        VFT2_UNKNOWN
-echo BEGIN
-echo    BLOCK "StringFileInfo"
-echo    BEGIN
-echo        BLOCK "000004B0"
-echo        BEGIN
-echo            VALUE "CompanyName", "Centreon\0"
-echo            VALUE "FileDescription", " \0"
-echo            VALUE "FileVersion", "1.0.0.0\0"
-echo            VALUE "InternalName", " \0"
-echo            VALUE "LegalCopyright", " \0"
-echo            VALUE "LegalTrademarks", " \0"
-echo            VALUE "OriginalFilename", " \0"
-echo            VALUE "ProductName", "centreon-plugins\0"
-echo            VALUE "ProductVersion", "%VERSION_PLUGIN%.0\0"
-echo        END
-echo    END
-echo    BLOCK "VarFileInfo"
-echo    BEGIN
-echo        VALUE "Translation", 0x00, 0x04B0
-echo    END
-echo END
-echo.
-echo WINEXE ICON winres\\pp.ico
+ECHO #define PP_MANIFEST_FILEFLAGS 0
+ECHO #include ^<windows.h^>
+ECHO.
+ECHO CREATEPROCESS_MANIFEST_RESOURCE_ID RT_MANIFEST "winres\\pp.manifest"
+ECHO.
+ECHO VS_VERSION_INFO VERSIONINFO
+ECHO    FILEVERSION        0,0,0,0
+ECHO    PRODUCTVERSION     0,0,0,0
+ECHO    FILEFLAGSMASK      VS_FFI_FILEFLAGSMASK
+ECHO    FILEFLAGS          PP_MANIFEST_FILEFLAGS
+ECHO    FILEOS             VOS_NT_WINDOWS32
+ECHO    FILETYPE           VFT_APP
+ECHO    FILESUBTYPE        VFT2_UNKNOWN
+ECHO BEGIN
+ECHO    BLOCK "StringFileInfo"
+ECHO    BEGIN
+ECHO        BLOCK "000004B0"
+ECHO        BEGIN
+ECHO            VALUE "CompanyName", "Centreon\0"
+ECHO            VALUE "FileDescription", " \0"
+ECHO            VALUE "FileVersion", "1.0.0.0\0"
+ECHO            VALUE "InternalName", " \0"
+ECHO            VALUE "LegalCopyright", " \0"
+ECHO            VALUE "LegalTrademarks", " \0"
+ECHO            VALUE "OriginalFilename", " \0"
+ECHO            VALUE "ProductName", "centreon-plugins\0"
+ECHO            VALUE "ProductVersion", "%VERSION_PLUGIN%\0"
+ECHO        END
+ECHO    END
+ECHO    BLOCK "VarFileInfo"
+ECHO    BEGIN
+ECHO        VALUE "Translation", 0x00, 0x04B0
+ECHO    END
+ECHO END
+ECHO.
+ECHO WINEXE ICON winres\\pp.ico
 )> %RC_FILE%
 
-for /f "delims=" %%i in ('dir /ad /B %PERL_INSTALL_DIR%\cpan\build\PAR-Packer-*') do set "PAR_PACKER_DIRNAME=%%i"
+FOR /f "delims=" %%i IN ('DIR /ad /B %PERL_INSTALL_DIR%\cpan\build\PAR-Packer-*') DO SET "PAR_PACKER_DIRNAME=%%i"
 SET PAR_PACKER_SRC=%PERL_INSTALL_DIR%\cpan\build\%PAR_PACKER_DIRNAME%
 
-copy /Y %ICO_FILE% %PAR_PACKER_SRC%\myldr\winres\pp.ico
-copy /Y centreon.rc %PAR_PACKER_SRC%\myldr\winres\pp.rc
-if exist %PAR_PACKER_SRC%\myldr\ppresource.coff del %PAR_PACKER_SRC%\myldr\ppresource.coff
-cd /D %PAR_PACKER_SRC%\myldr\ && perl Makefile.PL
-cd /D %PAR_PACKER_SRC%\myldr\ && gmake boot.exe
-cd /D %PAR_PACKER_SRC%\myldr\ && gmake Static.pm
-attrib -R %PERL_INSTALL_DIR%\perl\site\lib\PAR\StrippedPARL\Static.pm
-copy /Y %PAR_PACKER_SRC%\myldr\Static.pm %PERL_INSTALL_DIR%\perl\site\lib\PAR\StrippedPARL\Static.pm
+COPY /Y %ICO_FILE% %PAR_PACKER_SRC%\myldr\winres\pp.ico
+COPY /Y %RC_FILE% %PAR_PACKER_SRC%\myldr\winres\pp.rc
+IF EXIST %PAR_PACKER_SRC%\myldr\ppresource.coff DEL %PAR_PACKER_SRC%\myldr\ppresource.coff
+CD /D %PAR_PACKER_SRC%\myldr\ && perl Makefile.PL
+CD /D %PAR_PACKER_SRC%\myldr\ && gmake boot.exe
+CD /D %PAR_PACKER_SRC%\myldr\ && gmake Static.pm
+ATTRIB -R %PERL_INSTALL_DIR%\perl\site\lib\PAR\StrippedPARL\Static.pm
+COPY /Y %PAR_PACKER_SRC%\myldr\Static.pm %PERL_INSTALL_DIR%\perl\site\lib\PAR\StrippedPARL\Static.pm
 
-chdir /d %~dp0
-set PAR_VERBATIM=1
+CHDIR /d %~dp0
+SET PAR_VERBATIM=1
 
-cmd /C %PERL_INSTALL_DIR%\perl\site\bin\pp --lib=centreon-plugins\ -o scripts\x64\centreon\centreon_plugins.exe centreon-plugins\centreon_plugins.pl ^
+CMD /C %PERL_INSTALL_DIR%\perl\site\bin\pp --lib=centreon-plugins\ ^
+-o resources\scripts\x64\centreon\centreon_plugins.exe centreon-plugins\centreon_plugins.pl ^
 --unicode ^
 -X IO::Socket::INET6 ^
 --link=%PERL_INSTALL_DIR%\c\bin\libxml2-2__.dll ^
@@ -196,4 +196,6 @@ cmd /C %PERL_INSTALL_DIR%\perl\site\bin\pp --lib=centreon-plugins\ -o scripts\x6
 -M storage::dell::compellent::local::mode::volumeusage ^
 --verbose
 
-pause
+DEL /F /Q %RC_FILE%
+
+PAUSE
