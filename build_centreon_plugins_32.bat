@@ -1,6 +1,6 @@
 @ECHO OFF
 
-SET VERSION_PLUGIN=20190704
+SET VERSION_PLUGIN=20191002
 
 PATH=C:\Strawberry32\c\bin;C:\Strawberry32\perl\bin;C:\Windows\System32
 
