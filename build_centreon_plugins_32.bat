@@ -196,6 +196,16 @@ CMD /C %PERL_INSTALL_DIR%\perl\site\bin\pp --lib=centreon-plugins\ ^
 -M storage::dell::compellent::local::plugin ^
 -M storage::dell::compellent::local::mode::hbausage ^
 -M storage::dell::compellent::local::mode::volumeusage ^
+-M storage::emc::symmetrix::vmax::local::plugin ^
+-M storage::emc::symmetrix::vmax::local::mode::hardware ^
+-M storage::emc::symmetrix::vmax::local::mode::components::cabling ^
+-M storage::emc::symmetrix::vmax::local::mode::components::director ^
+-M storage::emc::symmetrix::vmax::local::mode::components::fabric ^
+-M storage::emc::symmetrix::vmax::local::mode::components::module ^
+-M storage::emc::symmetrix::vmax::local::mode::components::power ^
+-M storage::emc::symmetrix::vmax::local::mode::components::sparedisk ^
+-M storage::emc::symmetrix::vmax::local::mode::components::temperature ^
+-M storage::emc::symmetrix::vmax::local::mode::components::voltage ^
 --verbose
 
 DEL /F /Q %RC_FILE%
