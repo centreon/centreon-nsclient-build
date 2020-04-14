@@ -9,8 +9,9 @@ Pull request are disabled as Centreon teams manage the upgrade to the newer vers
 ## Prerequisites
 
 To use this repo, you must have:
-    * a Windows Server 2K8 or above, with a x64 architecture
-    * a 64bits version of Strawberry perl (http://strawberryperl.com/). The build env is tested with the version below: 
+
+* a Windows Server 2K8 or above, with a x64 architecture
+* a 64bits version of Strawberry perl (http://strawberryperl.com/). The build env is tested with the version below: 
 
 ```
 C:\Strawberry>perl -v
@@ -27,9 +28,26 @@ this system using "man perl" or "perldoc perl".  If you have access to the
 Internet, point your browser at http://www.perl.org/, the Perl Home Page.
 ```
 
-    * perl PAR::Packer module installed. Substitute 'C:\Strawberry' with your own perl installation dir:
+* perl PAR::Packer module installed. Substitute 'C:\Strawberry' with your own perl installation dir:
 
 ```C:\Strawberry>cpan install PAR::Packer```
+
+* Some additionnal perl libs installed
+
+```
+Authen::NTLM
+Date::Manip
+Email::Send::SMTP::Gmail
+HTTP::ProxyPAC
+IO::Socket::SSL
+JE
+JSON::XS
+Net::FTPSSL
+Net::SSLeay
+Tie::RefHash::Weak
+Win32::Job
+XML::LibXML::SAX
+```
 
 ## How to use it
 
@@ -61,7 +79,9 @@ NullSoft Install Script system file. It will allow you to define some properties
 The three lines you may want to modify are:
 
 ```!define PRODUCT_VERSION "0.5.2.35"```                # Set the NSClient++ version, in this repository we are using 0.5.2.35, do not modify unless you know what you're doing
+
 ```!define PACKAGE_VERSION "20200410"```                # Set the release version, once again it's easier to stick to the official centreon-plugins release
+
 ```!define MSI_NSCLIENT "NSCP-0.5.2.35-Win32.msi"```    # If you modified the PRODUCT version, you may want to also tune this line to reflect the associated MSI
 
 #### resources/nsclient.ini
@@ -73,18 +93,20 @@ This is your NSClient++ main config file, just modify it. A full documentation o
 
 Here are the step to take to build a NSClient agent: 
 
-* Clone this repository 
+#### Clone repositories
 
 ```git clone https://github.com/centreon/centreon-nsclient```
 
-* (optionnal) Update its submodule (centreon-plugins)
+* (optionnal) Update its submodule (centreon-plugins) 
+
+:warning: Be warned that you might use some code from centreon-plugins master (=> unstable or wip code). If this is not what you want, just go to the next step. 
 
 ```
 cd centreon-nsclient
 git submodule update --remote --merge
 ```
 
-* build the 32bits plugin version
+#### build the 32bits plugin version
 
 ```C:\Your\path\to\localrepo\centreon-nsclient> build_centreon_plugins_32.bat```
 
@@ -115,7 +137,7 @@ C:\Your\path\to\localrepo\centreon-nsclient>
 
 If it succeed, you must be able to see a centreon_plugins.exe in resources\scripts\Win32 directory.
 
-* build the 64bits plugin version
+#### build the 64bits plugin version
 
 ```C:\Your\path\to\localrepo\centreon-nsclient> build_centreon_plugins_64.bat```
 
@@ -145,7 +167,7 @@ C:\Your\path\to\localrepo\centreon-nsclient>
 
 If it succeed, you must be able to see a centreon_plugins.exe in resources\scripts\x64 directory.
 
-* Build Centreon-NSCLient++ agent
+#### Build Centreon-NSCLient++ agent
 
 ```C:\Users\Administrator\Desktop\centreon-Agent-NSclient>build_centreon_nsclient.bat```
 
@@ -202,4 +224,4 @@ Note that you can use the following flags parameters of the .exe execution:
     - /S : Silently installation
     - /nouninstall : no uninstall of the current package if it was already installed
 
-Now, it's time to test them :) Enjoy ! 
+Now, it's deployment time :) Enjoy ! 
