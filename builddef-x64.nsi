@@ -1,7 +1,7 @@
 ; builddef-x64.nsi
 
 !define PRODUCT_VERSION "0.5.2.35"
-!define PACKAGE_VERSION "20191002"
+!define PACKAGE_VERSION "20200410"
 !define MSI_NSCLIENT "NSCP-0.5.2.35-x64.msi"
 
 !define MULTIUSER_EXECUTIONLEVEL Admin
