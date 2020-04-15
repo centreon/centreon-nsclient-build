@@ -138,6 +138,9 @@ CMD /C %PERL_INSTALL_DIR%\perl\site\bin\pp --lib=centreon-plugins\ ^
 -M apps::exchange::2010::local::mode::queues ^
 -M apps::exchange::2010::local::mode::replicationhealth ^
 -M apps::exchange::2010::local::mode::services ^
+-M apps::protocols::ldap::plugin ^
+-M apps::protocols::ldap::mode::login ^
+-M apps::protocols::ldap::mode::search ^
 -M apps::protocols::ftp::plugin ^
 -M apps::protocols::ftp::mode::commands ^
 -M apps::protocols::ftp::mode::date ^
@@ -159,6 +162,7 @@ CMD /C %PERL_INSTALL_DIR%\perl\site\bin\pp --lib=centreon-plugins\ ^
 -M apps::wsus::local::mode::updatesstatus ^
 -M apps::wsus::local::mode::synchronisationstatus ^
 -M apps::wsus::local::mode::serverstatistics ^
+-M centreon::common::protocols::ldap::lib::ldap ^
 -M centreon::common::powershell::exchange::2010::powershell ^
 -M centreon::common::powershell::functions ^
 -M centreon::common::powershell::hyperv::2012::listnodevms ^
