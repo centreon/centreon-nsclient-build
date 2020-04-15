@@ -95,15 +95,15 @@ Here are the step to take to build a NSClient agent:
 
 #### Clone repositories
 
-```git clone https://github.com/centreon/centreon-nsclient```
+```git clone https://github.com/centreon/centreon-nsclient-build```
 
 * (optionnal) Update its submodule (centreon-plugins) 
 
 :warning: Be warned that you might use some code from centreon-plugins master (=> unstable or wip code). If this is not what you want, just go to the next step. 
 
 ```
-cd centreon-nsclient
-git submodule update --remote --merge
+cd centreon-nsclient-build
+git submodule update --init
 ```
 
 #### build the 32bits plugin version
