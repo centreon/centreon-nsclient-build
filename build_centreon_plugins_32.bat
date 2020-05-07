@@ -100,6 +100,7 @@ CMD /C %PERL_INSTALL_DIR%\perl\site\bin\pp --lib=centreon-plugins\ ^
 -M apps::backup::veeam::local::plugin ^
 -M apps::backup::veeam::local::mode::jobstatus ^
 -M apps::backup::veeam::local::mode::listjobs ^
+-M apps::backup::veeam::local::mode::tapejobs ^
 -M apps::centreon::local::plugin ^
 -M apps::centreon::local::mode::downtimetrap ^
 -M apps::centreon::local::mode::centreonpluginsversion ^
