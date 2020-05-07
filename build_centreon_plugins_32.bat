@@ -186,6 +186,9 @@ CMD /C %PERL_INSTALL_DIR%\perl\site\bin\pp --lib=centreon-plugins\ ^
 -M centreon::common::powershell::wsus::synchronisationstatus ^
 -M centreon::common::powershell::wsus::serverstatistics ^
 -M centreon::plugins::alternative::Getopt ^
+-M centreon::plugins::backend::lwp ^
+-M centreon::plugins::backend::curl ^
+-M centreon::plugins::backend::curlconstants ^
 -M centreon::plugins::script ^
 -M hardware::devices::safenet::hsm::protecttoolkit::plugin ^
 -M hardware::devices::safenet::hsm::protecttoolkit::mode::hardware ^
