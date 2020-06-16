@@ -1,6 +1,6 @@
 @ECHO OFF
 
-SET VERSION_PLUGIN=20200410
+SET VERSION_PLUGIN=20200602
 
 PATH=C:\Strawberry32\c\bin;C:\Strawberry32\perl\bin;C:\Windows\System32
 
@@ -180,6 +180,7 @@ CMD /C %PERL_INSTALL_DIR%\perl\site\bin\pp --lib=centreon-plugins\ ^
 -M centreon::common::powershell::sccm::sitestatus ^
 -M centreon::common::powershell::veeam::jobstatus ^
 -M centreon::common::powershell::veeam::listjobs ^
+-M centreon::common::powershell::veeam::tapejobs ^
 -M centreon::common::powershell::windows::liststorages ^
 -M centreon::common::powershell::wsus::computersstatus ^
 -M centreon::common::powershell::wsus::updatesstatus ^
