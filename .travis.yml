@@ -1,0 +1,10 @@
+matrix:
+
+  include:
+
+    - language: bash
+      os: windows
+      script:
+      - choco install -y strawberryperl --version=5.26.3.1
+      - cd C:\Strawberry
+      - cpan install PAR::Packer
