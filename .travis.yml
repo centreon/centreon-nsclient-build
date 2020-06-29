@@ -1,3 +1,6 @@
+# Prevent build on deployed tag
+if: tag IS blank
+
 env:
   - PERL_VERSION=5.26.3.1
 
