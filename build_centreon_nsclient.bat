@@ -51,5 +51,3 @@ CHDIR ..
 
 RMDIR /S /Q build 2> NUL
 DEL /F /Q resources\resources.zip
-
-PAUSE

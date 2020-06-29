@@ -1,0 +1,93 @@
+env:
+  - PERL_VERSION=5.26.3.1
+
+modules: &modules
+  # Use cpanm to install modules, which is much faster than cpan
+  # Mimic the cpan build dir, which is then used by build script
+  - export PERL_CPANM_HOME=$PERL_DIR/cpan/
+  - cpanm --notest PAR::Packer
+  - ln -s $PERL_DIR/cpan/work/* $PERL_DIR/cpan/build
+  - cpanm --notest Authen::NTLM
+  - cpanm --notest Date::Manip
+  - cpanm --notest Email::Send::SMTP::Gmail
+  - cpanm --notest HTTP::ProxyPAC
+  - cpanm --notest IO::Socket::SSL
+  - cpanm --notest JE
+  - cpanm --notest JSON::XS
+  - cpanm --notest Net::FTPSSL
+  - cpanm --notest Net::SSLeay
+  - cpanm --notest Tie::RefHash::Weak
+  - cpanm --notest Win32::Job
+  - cpanm --notest XML::LibXML::SAX
+
+perl_dir: &perl_dir
+  - PATH_ORIG=${PATH_ORIG:-$PATH}
+  - export PATH="$PERL_DIR/c/bin:$PERL_DIR/perl/site/bin:$PERL_DIR/perl/bin:$PATH_ORIG"
+
+perl_dir32: &perl_dir32
+  - export PERL_DIR=/c/Strawberry32
+  - *perl_dir
+
+perl_dir64: &perl_dir64
+  - export PERL_DIR=/c/Strawberry
+  - *perl_dir
+
+os: windows
+language: bash
+jobs:
+  include:
+    - name: All
+      before_script:
+      # Properly set centreon-plugins version : plugins-date (plugins-hash build-hash)
+      - export VERSION_PLUGIN=$(cd centreon-plugins && git log --pretty=format:'%ci (%h' -n 1 | sed 's/ .* / /; s/-//g')$(git log --pretty=format:' %h)' -n 1)
+      - sed -i "s/^SET VERSION_PLUGIN=.*/SET VERSION_PLUGIN=$VERSION_PLUGIN/" build_centreon_plugins_*.bat
+      - sed -i "s/^!define PACKAGE_VERSION .*/!define PACKAGE_VERSION \"${VERSION_PLUGIN%% *}\"/" builddef-*.nsi
+      - sed -i "s/^my \$global_version = .*/my \$global_version = '$VERSION_PLUGIN';/" centreon-plugins/centreon/plugins/script.pm
+      # Remove MinGW just to be sure it does not interfere
+      - choco uninstall -y mingw
+      # Install Perl in specific version, x86 and x64
+      - choco install -y strawberryperl --version=$PERL_VERSION --x86
+      - mv /c/Strawberry /c/Strawberry32
+      - choco install -y strawberryperl --version=$PERL_VERSION --force
+      # Install required modules
+      - *perl_dir32
+      - *modules
+      - *perl_dir64
+      - *modules
+      script:
+      # Build 32 bits version
+      - *perl_dir32
+      - ./build_centreon_plugins_32.bat
+      - ./resources/scripts/Win32/centreon/centreon_plugins.exe --version | grep -i version
+      # Build 64 bits version
+      - *perl_dir64
+      - ./build_centreon_plugins_64.bat
+      - ./resources/scripts/x64/centreon/centreon_plugins.exe --version | grep -i version
+      # Build NSClient++
+      - ./build_centreon_nsclient.bat
+
+      # To generate the deployment api_key :
+      # Install Travis CLI : https://github.com/travis-ci/travis.rb#installation
+      # And from the repository, run : travis setup releases
+      # Then, simply and only update api_key.secure below
+      before_deploy:
+      - git config --local user.name "centreon"
+      - git config --local user.email "noreply@centreon.com"
+      - export TRAVIS_TAG=$(echo $VERSION_PLUGIN | sed 's/[()]//g; s/ /_/g')
+      - git tag $TRAVIS_TAG
+      - mv resources/scripts/Win32/centreon/centreon_plugins.exe /tmp/centreon_plugins_x86.exe
+      - mv resources/scripts/x64/centreon/centreon_plugins.exe /tmp/centreon_plugins_x64.exe
+      - mv Centreon-NSClient-*.exe /tmp/
+      - export NSCLIENT32=$(ls /tmp/Centreon-NSClient-*32.exe)
+      - export NSCLIENT64=$(ls /tmp/Centreon-NSClient-*64.exe)
+      deploy:
+        provider: releases
+        api_key:
+          secure: centreon_secure_api_key
+        file:
+        - /tmp/centreon_plugins_x86.exe
+        - /tmp/centreon_plugins_x64.exe
+        - $NSCLIENT32
+        - $NSCLIENT64
+        on:
+          branch: master
