@@ -18,6 +18,7 @@ modules: &modules
   - cpanm --notest JE
   - cpanm --notest JSON::XS
   - cpanm --notest Net::FTPSSL
+  - cpanm --notest Net::NTP
   - cpanm --notest Net::SSLeay
   - cpanm --notest Tie::RefHash::Weak
   - cpanm --notest Win32::Job
