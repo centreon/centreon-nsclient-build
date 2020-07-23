@@ -70,6 +70,10 @@ jobs:
       - ./build_centreon_plugins_64.bat
       - ./resources/scripts/x64/centreon/centreon_plugins.exe --version | grep -i version
       # Build NSClient++
+      - cp centreon-plugins/apps/activedirectory/local/conf/dcdiag.xml resources/scripts/Win32/centreon/conf/
+      - cp centreon-plugins/apps/activedirectory/local/conf/dcdiag.xml resources/scripts/x64/centreon/conf/
+      - cp centreon-plugins/os/windows/local/conf/qwinsta.xml resources/scripts/Win32/centreon/conf/
+      - cp centreon-plugins/os/windows/local/conf/qwinsta.xml resources/scripts/x64/centreon/conf/
       - ./build_centreon_nsclient.bat
 
       # To generate the deployment api_key :
@@ -83,6 +87,9 @@ jobs:
       - git tag $TRAVIS_TAG
       - mv resources/scripts/Win32/centreon/centreon_plugins.exe /tmp/centreon_plugins_x86.exe
       - mv resources/scripts/x64/centreon/centreon_plugins.exe /tmp/centreon_plugins_x64.exe
+      - rm resources/scripts/Win32/centreon/conf/* resources/scripts/x64/centreon/conf/*
+      - cp centreon-plugins/apps/activedirectory/local/conf/dcdiag.xml /tmp/
+      - cp centreon-plugins/os/windows/local/conf/qwinsta.xml /tmp/
       - mv Centreon-NSClient-*.exe /tmp/
       - export NSCLIENT32=$(ls /tmp/Centreon-NSClient-*32.exe)
       - export NSCLIENT64=$(ls /tmp/Centreon-NSClient-*64.exe)
@@ -94,6 +101,8 @@ jobs:
         file:
         - /tmp/centreon_plugins_x86.exe
         - /tmp/centreon_plugins_x64.exe
+        - /tmp/dcdiag.xml
+        - /tmp/qwinsta.xml
         - $NSCLIENT32
         - $NSCLIENT64
         on:
