@@ -70,6 +70,7 @@ jobs:
       - ./build_centreon_plugins_64.bat
       - ./resources/scripts/x64/centreon/centreon_plugins.exe --version | grep -i version
       # Build NSClient++
+      - mkdir -p resources/scripts/Win32/centreon/conf/ resources/scripts/x64/centreon/conf/
       - cp centreon-plugins/apps/activedirectory/local/conf/dcdiag.xml resources/scripts/Win32/centreon/conf/
       - cp centreon-plugins/apps/activedirectory/local/conf/dcdiag.xml resources/scripts/x64/centreon/conf/
       - cp centreon-plugins/os/windows/local/conf/qwinsta.xml resources/scripts/Win32/centreon/conf/
