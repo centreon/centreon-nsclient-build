@@ -1,6 +1,9 @@
 # Prevent build on deployed tag
 if: tag IS blank
 
+# Tip to clean / delete old tags & releases :
+# git pull; for tag in `git tag -l`; do git push origin :refs/tags/$tag; done
+
 env:
   - PERL_VERSION=5.26.3.1
 
@@ -82,10 +85,6 @@ jobs:
       # And from the repository, run : travis setup releases
       # Then, simply and only update api_key.secure below
       before_deploy:
-      - git config --local user.name "centreon"
-      - git config --local user.email "noreply@centreon.com"
-      - export TRAVIS_TAG=${PLUGINS_DATE}_${PLUGINS_HASH}_${BUILD_HASH}
-      - git tag $TRAVIS_TAG
       - mv resources/scripts/Win32/centreon/centreon_plugins.exe /tmp/centreon_plugins_x86.exe
       - mv resources/scripts/x64/centreon/centreon_plugins.exe /tmp/centreon_plugins_x64.exe
       - rm resources/scripts/Win32/centreon/conf/* resources/scripts/x64/centreon/conf/*
@@ -99,6 +98,9 @@ jobs:
         api_key:
           secure: centreon_secure_api_key
         name: "$PLUGINS_DATE ($PLUGINS_HASH $BUILD_HASH)"
+        tag_name: ${PLUGINS_DATE}_${PLUGINS_HASH}_${BUILD_HASH}
+        #body: ignored unfortunately
+        prerelease: true
         file:
         - /tmp/centreon_plugins_x86.exe
         - /tmp/centreon_plugins_x64.exe
