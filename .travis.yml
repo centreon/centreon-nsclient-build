@@ -26,6 +26,24 @@ modules: &modules
   - cpanm --notest Tie::RefHash::Weak
   - cpanm --notest Win32::Job
   - cpanm --notest XML::LibXML::SAX
+  # Below additions are for check_logfiles (in doc order)
+  # https://github.com/lausser/check_logfiles/blob/master/README.windows-exe
+  - cpanm --notest PerlIO
+  - cpanm --notest Digest::MD5
+  - cpanm --notest Encode::Encoding
+  - cpanm --notest Encode::Unicode
+  - cpanm --notest Encode::Unicode::UTF7
+  - cpanm --notest Net::Domain
+  - cpanm --notest Win32::NetResource
+  - cpanm --notest Win32::Daemon
+  - cpanm --notest Time::Piece
+  - cpanm --notest Time::Local
+  - cpanm --notest Win32::EventLog
+  - cpanm --notest Win32::TieRegistry
+  - cpanm --notest Win32::WinError
+  - cpanm --notest Date::Manip
+  - cpanm --notest Win32::OLE
+  - cpanm --notest Win32::Service
 
 perl_dir: &perl_dir
   - PATH_ORIG=${PATH_ORIG:-$PATH}
@@ -64,16 +82,22 @@ jobs:
       - *perl_dir64
       - *modules
       script:
-      # Build 32 bits version
+      # Build 32 bits versions
       - *perl_dir32
+      - ./build_check_logfiles_32.bat
+      - ./check_logfiles/plugins-scripts/check_logfiles_x86.exe --version | grep -i check_logfiles
       - ./build_centreon_plugins_32.bat
       - ./resources/scripts/Win32/centreon/centreon_plugins.exe --version | grep -i version
-      # Build 64 bits version
+      # Build 64 bits versions
       - *perl_dir64
+      - ./build_check_logfiles_64.bat
+      - ./check_logfiles/plugins-scripts/check_logfiles_x64.exe --version | grep -i check_logfiles
       - ./build_centreon_plugins_64.bat
       - ./resources/scripts/x64/centreon/centreon_plugins.exe --version | grep -i version
       # Build NSClient++
       - mkdir -p resources/scripts/Win32/centreon/conf/ resources/scripts/x64/centreon/conf/
+      - cp check_logfiles/plugins-scripts/check_logfiles_x86.exe resources/scripts/Win32/centreon/check_logfiles.exe
+      - cp check_logfiles/plugins-scripts/check_logfiles_x64.exe resources/scripts/x64/centreon/check_logfiles.exe
       - cp centreon-plugins/apps/activedirectory/local/conf/dcdiag.xml resources/scripts/Win32/centreon/conf/
       - cp centreon-plugins/apps/activedirectory/local/conf/dcdiag.xml resources/scripts/x64/centreon/conf/
       - cp centreon-plugins/os/windows/local/conf/qwinsta.xml resources/scripts/Win32/centreon/conf/
@@ -87,6 +111,8 @@ jobs:
       before_deploy:
       - mv resources/scripts/Win32/centreon/centreon_plugins.exe /tmp/centreon_plugins_x86.exe
       - mv resources/scripts/x64/centreon/centreon_plugins.exe /tmp/centreon_plugins_x64.exe
+      - mv resources/scripts/Win32/centreon/check_logfiles.exe /tmp/check_logfiles_x86.exe
+      - mv resources/scripts/x64/centreon/check_logfiles.exe /tmp/check_logfiles_x64.exe
       - rm resources/scripts/Win32/centreon/conf/* resources/scripts/x64/centreon/conf/*
       - cp centreon-plugins/apps/activedirectory/local/conf/dcdiag.xml /tmp/
       - cp centreon-plugins/os/windows/local/conf/qwinsta.xml /tmp/
@@ -104,6 +130,8 @@ jobs:
         file:
         - /tmp/centreon_plugins_x86.exe
         - /tmp/centreon_plugins_x64.exe
+        - /tmp/check_logfiles_x86.exe
+        - /tmp/check_logfiles_x64.exe
         - /tmp/dcdiag.xml
         - /tmp/qwinsta.xml
         - $NSCLIENT32
