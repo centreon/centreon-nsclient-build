@@ -24,5 +24,4 @@ CMD /C %PERL_INSTALL_DIR%\perl\site\bin\pp ^
 -M Win32::WinError ^
 -M Date::Manip ^
 -M Win32::OLE ^
--M Win32::Service ^
 --verbose

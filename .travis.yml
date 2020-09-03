@@ -43,7 +43,6 @@ modules: &modules
   - cpanm --notest Win32::WinError
   - cpanm --notest Date::Manip
   - cpanm --notest Win32::OLE
-  - cpanm --notest Win32::Service
 
 perl_dir: &perl_dir
   - PATH_ORIG=${PATH_ORIG:-$PATH}
