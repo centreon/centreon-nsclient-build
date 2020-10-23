@@ -101,13 +101,9 @@ jobs:
       - ./build_centreon_plugins_64.bat
       - ./resources/scripts/x64/centreon/centreon_plugins.exe --version | grep -i version
       # Build NSClient++
-      - mkdir -p resources/scripts/Win32/centreon/conf/ resources/scripts/x64/centreon/conf/
+      - mkdir -p resources/scripts/Win32/centreon/ resources/scripts/x64/centreon/
       - cp check_logfiles/plugins-scripts/check_logfiles_x86.exe resources/scripts/Win32/centreon/check_logfiles.exe
       - cp check_logfiles/plugins-scripts/check_logfiles_x64.exe resources/scripts/x64/centreon/check_logfiles.exe
-      - cp centreon-plugins/apps/activedirectory/local/conf/dcdiag.xml resources/scripts/Win32/centreon/conf/
-      - cp centreon-plugins/apps/activedirectory/local/conf/dcdiag.xml resources/scripts/x64/centreon/conf/
-      - cp centreon-plugins/os/windows/local/conf/qwinsta.xml resources/scripts/Win32/centreon/conf/
-      - cp centreon-plugins/os/windows/local/conf/qwinsta.xml resources/scripts/x64/centreon/conf/
       - ./build_centreon_nsclient.bat
 
       # To generate the deployment api_key :
@@ -119,9 +115,6 @@ jobs:
       - mv resources/scripts/x64/centreon/centreon_plugins.exe /tmp/centreon_plugins_${PLUGINS_DATE}_${PLUGINS_HASH}_${BUILD_HASH}_x64.exe
       - mv resources/scripts/Win32/centreon/check_logfiles.exe /tmp/check_logfiles_${CHKLOG_VERSION}_${CHKLOG_HASH}_${BUILD_HASH}_x86.exe
       - mv resources/scripts/x64/centreon/check_logfiles.exe /tmp/check_logfiles_${CHKLOG_VERSION}_${CHKLOG_HASH}_${BUILD_HASH}_x64.exe
-      - rm resources/scripts/Win32/centreon/conf/* resources/scripts/x64/centreon/conf/*
-      - cp centreon-plugins/apps/activedirectory/local/conf/dcdiag.xml /tmp/
-      - cp centreon-plugins/os/windows/local/conf/qwinsta.xml /tmp/
       - mv Centreon-NSClient-*.exe /tmp/
       - export NSCLIENT32=$(ls /tmp/Centreon-NSClient-*32.exe)
       - export NSCLIENT64=$(ls /tmp/Centreon-NSClient-*64.exe)
@@ -138,8 +131,6 @@ jobs:
         - /tmp/centreon_plugins_${PLUGINS_DATE}_${PLUGINS_HASH}_${BUILD_HASH}_x64.exe
         - /tmp/check_logfiles_${CHKLOG_VERSION}_${CHKLOG_HASH}_${BUILD_HASH}_x86.exe
         - /tmp/check_logfiles_${CHKLOG_VERSION}_${CHKLOG_HASH}_${BUILD_HASH}_x64.exe
-        - /tmp/dcdiag.xml
-        - /tmp/qwinsta.xml
         - $NSCLIENT32
         - $NSCLIENT64
         on:

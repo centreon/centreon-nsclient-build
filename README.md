@@ -176,27 +176,22 @@ The process produces an output similar to:
 ```
 resources\scripts\Win32\centreon\centreon_plugins.exe
 resources\scripts\Win32\centreon\check_logfiles.exe
-resources\scripts\Win32\centreon\conf\dcdiag.xml
-resources\scripts\Win32\centreon\conf\qwinsta.xml
-4 File(s) copied
+2 File(s) copied
         1 file(s) copied.
         1 file(s) copied.
 
 7-Zip (a) [32] 16.02 : Copyright (c) 1999-2016 Igor Pavlov : 2016-05-21
 
 Scanning the drive:
-3 folders, 6 files, 30329416 bytes (29 MiB)
+2 folders, 4 files, 31971949 bytes (31 MiB)
 
 Creating archive: ..\resources\resources.zip
 
-Items to compress: 9
+Items to compress: 6
 
- 67% 6 + scripts\centreon\conf\qwinsta.xml
-[...]
-[...]
-[...]
-Files read from disk: 6
-Archive size: 19953883 bytes (20 MiB)
+
+Files read from disk: 4
+Archive size: 20661229 bytes (20 MiB)
 Everything is Ok
 ----------------------------------------------------------------------
 NSIS String Functions Header File 1.09 - Copyright 2004 Diego Pedroso
