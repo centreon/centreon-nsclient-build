@@ -82,6 +82,7 @@ CMD /C %PERL_INSTALL_DIR%\perl\site\bin\pp --lib=centreon-plugins\ ^
 -M JE ^
 -M JSON::XS ^
 -M Net::FTPSSL ^
+-M Net::NTP ^
 -M Net::SSLeay ^
 -M Tie::RefHash::Weak ^
 -M Win32::Job ^

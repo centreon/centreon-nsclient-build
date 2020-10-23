@@ -43,6 +43,7 @@ IO::Socket::SSL
 JE
 JSON::XS
 Net::FTPSSL
+Net::NTP
 Net::SSLeay
 Tie::RefHash::Weak
 Win32::Job
