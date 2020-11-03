@@ -1,0 +1,137 @@
+# Prevent build on deployed tag
+if: tag IS blank
+
+# Tip to clean / delete old tags & releases :
+# git pull; for tag in `git tag -l`; do git push origin :refs/tags/$tag; done
+
+env:
+  - PERL_VERSION=5.26.3.1
+
+modules: &modules
+  # Use cpanm to install modules, which is much faster than cpan
+  # Mimic the cpan build dir, which is then used by build script
+  - export PERL_CPANM_HOME=$PERL_DIR/cpan/
+  - cpanm --notest PAR::Packer
+  - ln -s $PERL_DIR/cpan/work/* $PERL_DIR/cpan/build
+  - cpanm --notest Authen::NTLM
+  - cpanm --notest Date::Manip
+  - cpanm --notest Email::Send::SMTP::Gmail
+  - cpanm --notest HTTP::ProxyPAC
+  - cpanm --notest IO::Socket::SSL
+  - cpanm --notest JE
+  - cpanm --notest JSON::XS
+  - cpanm --notest Net::FTPSSL
+  - cpanm --notest Net::NTP
+  - cpanm --notest Net::SSLeay
+  - cpanm --notest Tie::RefHash::Weak
+  - cpanm --notest Win32::Job
+  - cpanm --notest XML::LibXML::SAX
+  # Below additions are for check_logfiles (in doc order)
+  # https://github.com/lausser/check_logfiles/blob/master/README.windows-exe
+  - cpanm --notest PerlIO
+  - cpanm --notest Digest::MD5
+  - cpanm --notest Encode::Encoding
+  - cpanm --notest Encode::Unicode
+  - cpanm --notest Encode::Unicode::UTF7
+  - cpanm --notest Net::Domain
+  - cpanm --notest Win32::NetResource
+  - cpanm --notest Win32::Daemon
+  - cpanm --notest Time::Piece
+  - cpanm --notest Time::Local
+  - cpanm --notest Win32::EventLog
+  - cpanm --notest Win32::TieRegistry
+  - cpanm --notest Win32::WinError
+  - cpanm --notest Date::Manip
+  - cpanm --notest Win32::OLE
+
+perl_dir: &perl_dir
+  - PATH_ORIG=${PATH_ORIG:-$PATH}
+  - export PATH="$PERL_DIR/c/bin:$PERL_DIR/perl/site/bin:$PERL_DIR/perl/bin:$PATH_ORIG"
+
+perl_dir32: &perl_dir32
+  - export PERL_DIR=/c/Strawberry32
+  - *perl_dir
+
+perl_dir64: &perl_dir64
+  - export PERL_DIR=/c/Strawberry
+  - *perl_dir
+
+os: windows
+language: bash
+jobs:
+  include:
+    - name: All
+      before_script:
+      # Some build info
+      - export BUILD_DATE=$(TZ=Europe/Paris date +"%y%m%d%H%M%S")
+      - export BUILD_HASH=$(git log --pretty=format:'%h' -n 1)
+      # Get check_logfiles version numbers
+      - export CHKLOG_VERSION=$(grep '^AC_INIT(check_logfiles,' check_logfiles/configure.ac | sed 's/[^0-9.]//g')
+      - export CHKLOG_HASH=$(cd check_logfiles && git log --pretty=format:'%h' -n 1)
+      - sed -i "s/^AC_INIT(check_logfiles,.*/AC_INIT(check_logfiles,$CHKLOG_VERSION ($CHKLOG_HASH $BUILD_HASH))/" check_logfiles/configure.ac
+      - sed -i "s/^my \$release = .*/my \$release = '$CHKLOG_VERSION ($CHKLOG_HASH $BUILD_HASH)';/" check_logfiles/winconfig.pl
+      # Properly set centreon-plugins version : plugins-date (plugins-hash build-hash)
+      - export PLUGINS_DATE=$(cd centreon-plugins && git log --pretty=format:'%ci' -n 1 | sed 's/ .*//; s/-//g')
+      - export PLUGINS_HASH=$(cd centreon-plugins && git log --pretty=format:'%h' -n 1)
+      - sed -i "s/^SET VERSION_PLUGIN=.*/SET VERSION_PLUGIN=$PLUGINS_DATE ($PLUGINS_HASH $BUILD_HASH)/" build_centreon_plugins_*.bat
+      - sed -i "s/^my \$global_version = .*/my \$global_version = '$PLUGINS_DATE ($PLUGINS_HASH $BUILD_HASH)';/" centreon-plugins/centreon/plugins/script.pm
+      - sed -i "s/^!define PACKAGE_VERSION .*/!define PACKAGE_VERSION \"$PLUGINS_DATE\"/" builddef-*.nsi
+      # Remove MinGW just to be sure it does not interfere
+      - choco uninstall -y mingw
+      # Install Perl in specific version, x86 and x64
+      - choco install -y strawberryperl --version=$PERL_VERSION --x86
+      - mv /c/Strawberry /c/Strawberry32
+      - choco install -y strawberryperl --version=$PERL_VERSION --force
+      # Install required modules
+      - *perl_dir32
+      - *modules
+      - *perl_dir64
+      - *modules
+      script:
+      # Build 32 bits versions
+      - *perl_dir32
+      - ./build_check_logfiles_32.bat
+      - ./check_logfiles/plugins-scripts/check_logfiles_x86.exe --version | grep -i check_logfiles
+      - ./build_centreon_plugins_32.bat
+      - ./resources/scripts/Win32/centreon/centreon_plugins.exe --version | grep -i version
+      # Build 64 bits versions
+      - *perl_dir64
+      - ./build_check_logfiles_64.bat
+      - ./check_logfiles/plugins-scripts/check_logfiles_x64.exe --version | grep -i check_logfiles
+      - ./build_centreon_plugins_64.bat
+      - ./resources/scripts/x64/centreon/centreon_plugins.exe --version | grep -i version
+      # Build NSClient++
+      - mkdir -p resources/scripts/Win32/centreon/ resources/scripts/x64/centreon/
+      - cp check_logfiles/plugins-scripts/check_logfiles_x86.exe resources/scripts/Win32/centreon/check_logfiles.exe
+      - cp check_logfiles/plugins-scripts/check_logfiles_x64.exe resources/scripts/x64/centreon/check_logfiles.exe
+      - ./build_centreon_nsclient.bat
+
+      # To generate the deployment api_key :
+      # Install Travis CLI : https://github.com/travis-ci/travis.rb#installation
+      # And from the repository, run : travis setup releases
+      # Then, simply and only update api_key.secure below
+      before_deploy:
+      - mv resources/scripts/Win32/centreon/centreon_plugins.exe /tmp/centreon_plugins_${PLUGINS_DATE}_${PLUGINS_HASH}_${BUILD_HASH}_x86.exe
+      - mv resources/scripts/x64/centreon/centreon_plugins.exe /tmp/centreon_plugins_${PLUGINS_DATE}_${PLUGINS_HASH}_${BUILD_HASH}_x64.exe
+      - mv resources/scripts/Win32/centreon/check_logfiles.exe /tmp/check_logfiles_${CHKLOG_VERSION}_${CHKLOG_HASH}_${BUILD_HASH}_x86.exe
+      - mv resources/scripts/x64/centreon/check_logfiles.exe /tmp/check_logfiles_${CHKLOG_VERSION}_${CHKLOG_HASH}_${BUILD_HASH}_x64.exe
+      - mv Centreon-NSClient-*.exe /tmp/
+      - export NSCLIENT32=$(ls /tmp/Centreon-NSClient-*32.exe)
+      - export NSCLIENT64=$(ls /tmp/Centreon-NSClient-*64.exe)
+      deploy:
+        provider: releases
+        api_key:
+          secure: centreon_secure_api_key
+        name: "$BUILD_DATE build"
+        tag_name: $BUILD_DATE
+        #body: ignored unfortunately
+        prerelease: true
+        file:
+        - /tmp/centreon_plugins_${PLUGINS_DATE}_${PLUGINS_HASH}_${BUILD_HASH}_x86.exe
+        - /tmp/centreon_plugins_${PLUGINS_DATE}_${PLUGINS_HASH}_${BUILD_HASH}_x64.exe
+        - /tmp/check_logfiles_${CHKLOG_VERSION}_${CHKLOG_HASH}_${BUILD_HASH}_x86.exe
+        - /tmp/check_logfiles_${CHKLOG_VERSION}_${CHKLOG_HASH}_${BUILD_HASH}_x64.exe
+        - $NSCLIENT32
+        - $NSCLIENT64
+        on:
+          branch: master

@@ -1,3 +1,6 @@
 [submodule "centreon-plugins"]
 	path = centreon-plugins
 	url = https://github.com/centreon/centreon-plugins
+[submodule "check_logfiles"]
+	path = check_logfiles
+	url = https://github.com/lausser/check_logfiles.git

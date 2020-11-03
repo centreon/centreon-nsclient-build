@@ -217,5 +217,3 @@ CMD /C %PERL_INSTALL_DIR%\perl\site\bin\pp --lib=centreon-plugins\ ^
 --verbose
 
 DEL /F /Q %RC_FILE%
-
-PAUSE
