@@ -60,7 +60,7 @@ There are a lot of files in this repository, but you just have to know a few to 
 
 Those two files allow you to generate a centreon_plugins.exe to be executed on a 32 or 64 bits Windows OS. You can bring your own modifications to the following lines if needed: 
 
-- ```SET VERSION_PLUGIN=20200410```           # set the version of centreon-plugins, we recommend to follow official centreon_plugins releases (https://github.com/centreon-plugins/releases)
+- ```SET VERSION_PLUGIN=20000101```           # set the version of centreon-plugins, we recommend to follow official centreon_plugins releases (https://github.com/centreon-plugins/releases)
 - ```set PERL_INSTALL_DIR=C:\Strawberry```    # set the path to your Strawberry perl installation dir 
 
 If you want to add more plugins, its associated modes and dependencies, you can modify the ```CMD /C %PERL_INSTALL_DIR%\perl\site\bin\pp --lib=centreon-plugins\ ^``` command_line parameters. Only modify by adding of removing lines starting by -M. An extract below shows how we add our WSUS plugin to centreon_plugins.exe binary: 
@@ -79,11 +79,11 @@ NullSoft Install Script system file. It will allow you to define some properties
 
 The three lines you may want to modify are:
 
-```!define PRODUCT_VERSION "0.5.2.35"```                # Set the NSClient++ version, in this repository we are using 0.5.2.35, do not modify unless you know what you're doing
+```!define PRODUCT_VERSION "0.5.2.41"```                # Set the NSClient++ version, in this repository we are using 0.5.2.41, do not modify unless you know what you're doing
 
-```!define PACKAGE_VERSION "20200410"```                # Set the release version, once again it's easier to stick to the official centreon-plugins release
+```!define PACKAGE_VERSION "20000101"```                # Set the release version, once again it's easier to stick to the official centreon-plugins release
 
-```!define MSI_NSCLIENT "NSCP-0.5.2.35-Win32.msi"```    # If you modified the PRODUCT version, you may want to also tune this line to reflect the associated MSI
+```!define MSI_NSCLIENT "NSCP-0.5.2.41-Win32.msi"```    # If you modified the PRODUCT version, you may want to also tune this line to reflect the associated MSI
 
 #### resources/nsclient.ini
 
@@ -209,11 +209,11 @@ Press any key to continue . . .
 C:\Your\path\to\localrepo\centreon-nsclient>
 ```
 
-Output of this build routine is two binaries: Centreon-NSClient-0.5.2.35-20200410-Win32.exe Centreon-NSClient-0.5.2.35-20200410-x64.exe
+Output of this build routine is two binaries: Centreon-NSClient-0.5.2.41-20000101-Win32.exe Centreon-NSClient-0.5.2.41-20000101-x64.exe
 
 ## Installation 
 
-You can install the agent with a double-click on: Centreon-NSClient-0.5.2.35-20200410-Win32.exe or Centreon-NSClient-0.5.2.35-20200410-x64.exe. 
+You can install the agent with a double-click on: Centreon-NSClient-0.5.2.41-20000101-Win32.exe or Centreon-NSClient-0.5.2.41-20000101-x64.exe. 
 
 Note that you can use the following flags parameters of the .exe execution: 
 
