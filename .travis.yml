@@ -123,7 +123,7 @@ jobs:
       deploy:
         provider: releases
         api_key:
-          secure: centreon_secure_api_key
+          secure: "equPCmAXJfngs22Dacna0qyeZz1EB21GlAQP0QL1y6yZW48eFHniFZlj4CTGPqhA2nD0sLpj5MsSVrtZi6sJ49SrWb7dzWcVIoa4o9URE5Dc7d+GmU1mEtAKlLol9NgCw2kKJHDMT2jmXJ6TCtcM7Wbsj220uZYb0HKzS4+Xw6dNN9Hc/6Q2bapJ1ynABa+tUtyqbhe/e+cDcEEnq0jyoGOP4oqoCPjseiOi5wchbvgI5nyFvaOxI+SJSpVmxCDITXmxS7ppl7BNvJRaQfablRpNFlFpILxjrReTZqGGisqY03BdCI5jjWEwW/HdANeIzUbSW/Q5jm0PMUXlTRY1eFjGta2C3Y2GyCoG4wk/3LrGo83txfG/R62wBcXrDFaNL1vhyL+nlT3Aiixb8tzOUp26wedypDyYtXhAVV1yraZfc+IMCUPQ+6J8DbhHghrFt/oyP1e+0VNaiUZYk6wZxbudXf4q3DChhYCBBkCc5nCR70Y42h62J017ioa7dva5L9geqStWHT3tbUQAt9wZ9CEXNKLDeWtElYJqq2v9MOz/vthdKpG28iBhcqohECSf0aRQvGuA7xGo/jv7ojCqu1zKC5Ef/aKdlstXA+bBp0ndwLQCyXVTdgltV/YKJaOBUnKQtOmYtSpnEuoDa6VtoEROktR+lragJBejOnLXK2k="
         name: "$BUILD_DATE build"
         tag_name: $BUILD_DATE
         #body: ignored unfortunately
