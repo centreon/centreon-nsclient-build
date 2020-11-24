@@ -65,7 +65,7 @@ jobs:
     - name: All
       before_script:
       # Some build info
-      - export BUILD_DATE=$(TZ=Europe/Paris date +"%y%m%d%H%M%S")
+      - export BUILD_DATE=$(TZ=Europe/Paris date +"%Y%m%d%H%M%S")
       - export BUILD_HASH=$(git log --pretty=format:'%h' -n 1)
       # Get check_logfiles version numbers
       - export CHKLOG_VERSION=$(grep '^AC_INIT(check_logfiles,' check_logfiles/configure.ac | sed 's/[^0-9.]//g')
