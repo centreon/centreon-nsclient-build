@@ -43,6 +43,8 @@ modules: &modules
   - cpanm --notest Win32::WinError
   - cpanm --notest Date::Manip
   - cpanm --notest Win32::OLE
+  # Patch Net::NTP module (https://rt.cpan.org/Public/Bug/Display.html?id=59607)
+  - patch -u $PERL_DIR/perl/site/lib/Net/NTP.pm -i patches/ntp.diff
 
 perl_dir: &perl_dir
   - PATH_ORIG=${PATH_ORIG:-$PATH}
