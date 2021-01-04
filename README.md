@@ -224,24 +224,7 @@ Now, it's deployment time :) Enjoy !
 
 ## Plugin actually available with the centreon-plugins.exe binary 
 
-- apps::activedirectory::local::plugin
-- apps::backup::netbackup::local::plugin
-- apps::backup::veeam::local::plugin
-- apps::centreon::local::plugin
-- apps::citrix::local::plugin
-- apps::cluster::mscs::local::plugin
-- apps::exchange::2010::local::plugin (works also with Exchange > 2010)
-- apps::hyperv::2012::local::plugin
-- apps::iis::local::plugin
-- apps::protocols::ftp::plugin
-- apps::protocols::http::plugin
-- apps::protocols::ldap::plugin
-- apps::protocols::tcp::plugin
-- apps::protocols::x509::plugin
-- apps::sccm::local::plugin
-- apps::wsus::local::plugin
-- hardware::devices::safenet::hsm::protecttoolkit::plugin
-- os::windows::local::plugin
-- storage::dell::compellent::local::plugin
-- storage::emc::symmetrix::vmax::local::plugin
+To know which plugins are available in centreon-plugins.exe, use the following command: 
+
+`/path/to/centreon_plugins.exe --list-plugin
 
