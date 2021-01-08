@@ -113,6 +113,7 @@ CMD /C %PERL_INSTALL_DIR%\perl\site\bin\pp --lib=centreon-plugins\ ^
 -M apps::microsoft::exchange::local::mode::databases ^
 -M apps::microsoft::exchange::local::mode::listdatabases ^
 -M apps::microsoft::exchange::local::mode::imapmailbox ^
+-M apps::microsoft::exchange::local::mode::mailboxes ^
 -M apps::microsoft::exchange::local::mode::mapimailbox ^
 -M apps::microsoft::exchange::local::mode::outlookwebservices ^
 -M apps::microsoft::exchange::local::mode::owamailbox ^
