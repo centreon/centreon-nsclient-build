@@ -163,8 +163,9 @@ CMD /C %PERL_INSTALL_DIR%\perl\site\bin\pp --lib=centreon-plugins\ ^
 -M apps::protocols::tcp::plugin ^
 -M apps::protocols::tcp::mode::responsetime ^
 -M apps::protocols::x509::plugin ^
+-M apps::protocols::x509::custom::https ^
+-M apps::protocols::x509::custom::tcp ^
 -M apps::protocols::x509::mode::certificate ^
--M apps::protocols::x509::mode::validity ^
 -M centreon::common::protocols::ldap::lib::ldap ^
 -M centreon::common::powershell::exchange::powershell ^
 -M centreon::common::powershell::functions ^
