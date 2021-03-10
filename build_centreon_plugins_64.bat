@@ -94,6 +94,7 @@ CMD /C %PERL_INSTALL_DIR%\perl\site\bin\pp --lib=centreon-plugins\ ^
 -M apps::backup::netbackup::local::mode::tapeusage ^
 -M apps::backup::veeam::local::plugin ^
 -M apps::backup::veeam::local::mode::jobstatus ^
+-M apps::backup::veeam::local::mode::licenses ^
 -M apps::backup::veeam::local::mode::listjobs ^
 -M apps::backup::veeam::local::mode::tapejobs ^
 -M apps::centreon::local::plugin ^
@@ -179,9 +180,6 @@ CMD /C %PERL_INSTALL_DIR%\perl\site\bin\pp --lib=centreon-plugins\ ^
 -M centreon::common::powershell::hyperv::2012::scvmmvmstatus ^
 -M centreon::common::powershell::sccm::databasereplicationstatus ^
 -M centreon::common::powershell::sccm::sitestatus ^
--M centreon::common::powershell::veeam::jobstatus ^
--M centreon::common::powershell::veeam::listjobs ^
--M centreon::common::powershell::veeam::tapejobs ^
 -M centreon::common::powershell::windows::liststorages ^
 -M centreon::common::powershell::wsus::computersstatus ^
 -M centreon::common::powershell::wsus::updatesstatus ^
