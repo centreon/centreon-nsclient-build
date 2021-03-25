@@ -60,7 +60,7 @@ There are a lot of files in this repository, but you just have to know a few to 
 
 Those two files allow you to generate a centreon_plugins.exe to be executed on a 32 or 64 bits Windows OS. You can bring your own modifications to the following lines if needed: 
 
-- ```SET VERSION_PLUGIN=20000101```           # set the version of centreon-plugins, we recommend to follow official centreon_plugins releases (https://github.com/centreon-plugins/releases)
+- ```SET VERSION_PLUGIN=20000101```           # set the version of centreon-plugins, we recommend to follow official centreon_plugins releases (https://github.com/centreon/centreon-plugins/releases)
 - ```set PERL_INSTALL_DIR=C:\Strawberry```    # set the path to your Strawberry perl installation dir 
 
 If you want to add more plugins, its associated modes and dependencies, you can modify the ```CMD /C %PERL_INSTALL_DIR%\perl\site\bin\pp --lib=centreon-plugins\ ^``` command_line parameters. Only modify by adding of removing lines starting by -M. An extract below shows how we add our WSUS plugin to centreon_plugins.exe binary: 
