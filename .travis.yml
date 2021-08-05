@@ -23,6 +23,7 @@ modules: &modules
   - cpanm --notest Net::FTPSSL
   - cpanm --notest Net::NTP
   - cpanm --notest Net::SSLeay
+  - cpanm --notest Pod::Simple::Search
   - cpanm --notest Tie::RefHash::Weak
   - cpanm --notest Win32::Job
   - cpanm --notest XML::LibXML::SAX
