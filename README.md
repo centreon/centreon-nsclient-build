@@ -45,6 +45,7 @@ JSON::XS
 Net::FTPSSL
 Net::NTP
 Net::SSLeay
+Pod::Simple::Search
 Tie::RefHash::Weak
 Win32::Job
 XML::LibXML::SAX
