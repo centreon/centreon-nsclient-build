@@ -6,6 +6,8 @@ You can find here all sources and scripts to build your own version of the centr
 
 Pull request are disabled as Centreon teams manage the upgrade to the newer version of centreon-plugins and NSClient++. If you want to provide some feedback, ask for a new plugin to be included in the build routine, just open an issue to discuss about it. 
 
+This repository is being built using a Travis-ci free plan. You can get latest build artefacts here: https://github.com/centreon/centreon-nsclient-build/releases. 
+
 ## Prerequisites
 
 To use this repo, you must have:
