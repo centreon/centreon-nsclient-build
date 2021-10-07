@@ -127,6 +127,7 @@ CMD /C %PERL_INSTALL_DIR%\perl\site\bin\pp --lib=centreon-plugins\ ^
 -M apps::microsoft::exchange::local::mode::services ^
 -M apps::microsoft::hyperv::2012::local::plugin ^
 -M apps::microsoft::hyperv::2012::local::mode::listnodevms ^
+-M apps::microsoft::hyperv::2012::local::mode::scvmmdiscovery ^
 -M apps::microsoft::hyperv::2012::local::mode::scvmmintegrationservice ^
 -M apps::microsoft::hyperv::2012::local::mode::scvmmsnapshot ^
 -M apps::microsoft::hyperv::2012::local::mode::scvmmvmstatus ^
@@ -175,14 +176,6 @@ CMD /C %PERL_INSTALL_DIR%\perl\site\bin\pp --lib=centreon-plugins\ ^
 -M centreon::common::protocols::ldap::lib::ldap ^
 -M centreon::common::powershell::exchange::powershell ^
 -M centreon::common::powershell::functions ^
--M centreon::common::powershell::hyperv::2012::listnodevms ^
--M centreon::common::powershell::hyperv::2012::nodeintegrationservice ^
--M centreon::common::powershell::hyperv::2012::nodereplication ^
--M centreon::common::powershell::hyperv::2012::nodesnapshot ^
--M centreon::common::powershell::hyperv::2012::nodevmstatus ^
--M centreon::common::powershell::hyperv::2012::scvmmintegrationservice ^
--M centreon::common::powershell::hyperv::2012::scvmmsnapshot ^
--M centreon::common::powershell::hyperv::2012::scvmmvmstatus ^
 -M centreon::common::powershell::sccm::databasereplicationstatus ^
 -M centreon::common::powershell::sccm::sitestatus ^
 -M centreon::common::powershell::windows::liststorages ^
