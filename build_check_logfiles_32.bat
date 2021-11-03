@@ -3,12 +3,10 @@
 SET PERL_INSTALL_DIR=C:\Strawberry32
 SET PAR_VERBATIM=1
 
-CD check_logfiles
-CMD /C %PERL_INSTALL_DIR%\perl\bin\perl winconfig.pl --with-perl=%PERL_INSTALL_DIR%\perl\bin\perl
+CMD /C %PERL_INSTALL_DIR%\perl\bin\perl check_logfiles\winconfig.pl --with-perl=%PERL_INSTALL_DIR%\perl\bin\perl
 
-CD plugins-scripts
-CMD /C %PERL_INSTALL_DIR%\perl\site\bin\pp ^
--o check_logfiles_x86.exe check_logfiles ^
+CMD /C %PERL_INSTALL_DIR%\perl\site\bin\pp --lib=check_logfiles\plugins-scripts\ ^
+-o resources\scripts\win32\centreon\check_logfiles.exe check_logfiles\plugins-scripts\check_logfiles ^
 -M PerlIO ^
 -M Digest::MD5 ^
 -M Encode::Encoding ^

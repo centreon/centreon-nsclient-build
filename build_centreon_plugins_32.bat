@@ -1,6 +1,6 @@
 @ECHO OFF
 
-SET VERSION_PLUGIN=20000101
+SET VERSION_PLUGIN=20211102
 
 PATH=C:\Strawberry32\c\bin;C:\Strawberry32\perl\bin;C:\Windows\System32
 
@@ -84,6 +84,7 @@ CMD /C %PERL_INSTALL_DIR%\perl\site\bin\pp --lib=centreon-plugins\ ^
 -M Net::FTPSSL ^
 -M Net::NTP ^
 -M Net::SSLeay ^
+-M Net::LDAP ^
 -M Pod::Simple::Search ^
 -M Tie::RefHash::Weak ^
 -M Win32::Job ^
