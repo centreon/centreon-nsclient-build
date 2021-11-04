@@ -185,7 +185,12 @@ CMD /C %PERL_INSTALL_DIR%\perl\site\bin\pp --lib=centreon-plugins\ ^
 -M centreon::plugins::backend::http::lwp ^
 -M centreon::plugins::backend::http::curl ^
 -M centreon::plugins::backend::http::curlconstants ^
+-M centreon::plugins::backend::ssh::libssh ^
+-M centreon::plugins::backend::ssh::libsshconstants ^
+-M centreon::plugins::backend::ssh::plink ^
+-M centreon::plugins::backend::ssh::sshcli ^
 -M centreon::plugins::script ^
+-M centreon::plugins::script_custom::cli ^
 -M hardware::devices::safenet::hsm::protecttoolkit::plugin ^
 -M hardware::devices::safenet::hsm::protecttoolkit::mode::hardware ^
 -M hardware::devices::safenet::hsm::protecttoolkit::mode::components::temperature ^
