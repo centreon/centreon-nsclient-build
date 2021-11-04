@@ -6,7 +6,7 @@ SET PAR_VERBATIM=1
 CMD /C %PERL_INSTALL_DIR%\perl\bin\perl check_logfiles\winconfig.pl --with-perl=%PERL_INSTALL_DIR%\perl\bin\perl
 
 CMD /C %PERL_INSTALL_DIR%\perl\site\bin\pp --lib=check_logfiles\plugins-scripts\ ^
--o resources\scripts\x64\centreon\check_logfiles.exe check_logfiles\plugins-scripts\check_logfiles ^
+-o resources\scripts\x64\centreon\check_logfiles.exe check_logfiles\plugins-scripts\check_logfiles.pl ^
 -M PerlIO ^
 -M Digest::MD5 ^
 -M Encode::Encoding ^
