@@ -8,7 +8,7 @@ CMD /C %PERL_INSTALL_DIR%\perl\bin\perl winconfig.pl --with-perl=%PERL_INSTALL_D
 
 CD ..\
 CMD /C %PERL_INSTALL_DIR%\perl\site\bin\pp --lib=check_logfiles\plugins-scripts\ ^
--o resources\scripts\x64\centreon\check_logfiles.exe check_logfiles\plugins-scripts\check_logfiles.pl ^
+-o resources\scripts\x64\centreon\check_logfiles.exe check_logfiles\plugins-scripts\check_logfiles ^
 -M PerlIO ^
 -M Digest::MD5 ^
 -M Encode::Encoding ^

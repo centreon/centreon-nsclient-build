@@ -1,4 +1,4 @@
-@ECHO ON
+@ECHO OFF
 
 SET PERL_INSTALL_DIR=C:\Strawberry32
 SET PAR_VERBATIM=1
@@ -8,7 +8,7 @@ CMD /C %PERL_INSTALL_DIR%\perl\bin\perl winconfig.pl --with-perl=%PERL_INSTALL_D
 
 CD ..\
 CMD /C %PERL_INSTALL_DIR%\perl\site\bin\pp --lib=check_logfiles\plugins-scripts\ ^
--o resources\scripts\win32\centreon\check_logfiles.exe check_logfiles\plugins-scripts\check_logfiles.pl ^
+-o resources\scripts\win32\centreon\check_logfiles.exe check_logfiles\plugins-scripts\check_logfiles ^
 -M PerlIO ^
 -M Digest::MD5 ^
 -M Encode::Encoding ^
