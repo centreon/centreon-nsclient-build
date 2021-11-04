@@ -21,6 +21,7 @@ modules: &modules
   - cpanm --notest JE
   - cpanm --notest JSON::XS
   - cpanm --notest Net::FTPSSL
+  - cpanm --notest Net::LDAP
   - cpanm --notest Net::NTP
   - cpanm --notest Net::SSLeay
   - cpanm --notest Pod::Simple::Search
@@ -92,22 +93,22 @@ jobs:
       - *perl_dir64
       - *modules
       script:
+      # Create plugin directories
+      - mkdir -p resources/scripts/Win32/centreon/ resources/scripts/x64/centreon/
       # Build 32 bits versions
       - *perl_dir32
       - ./build_check_logfiles_32.bat
-      - ./check_logfiles/plugins-scripts/check_logfiles_x86.exe --version | grep -i check_logfiles
+      - ./resources/scripts/Win32/centreon/check_logfiles.exe --version | grep -i check_logfiles
       - ./build_centreon_plugins_32.bat
       - ./resources/scripts/Win32/centreon/centreon_plugins.exe --version | grep -i version
       # Build 64 bits versions
       - *perl_dir64
       - ./build_check_logfiles_64.bat
-      - ./check_logfiles/plugins-scripts/check_logfiles_x64.exe --version | grep -i check_logfiles
+      - ./resources/scripts/x64/centreon/check_logfiles_x64.exe --version | grep -i check_logfiles
       - ./build_centreon_plugins_64.bat
       - ./resources/scripts/x64/centreon/centreon_plugins.exe --version | grep -i version
       # Build NSClient++
-      - mkdir -p resources/scripts/Win32/centreon/ resources/scripts/x64/centreon/
-      - cp check_logfiles/plugins-scripts/check_logfiles_x86.exe resources/scripts/Win32/centreon/check_logfiles.exe
-      - cp check_logfiles/plugins-scripts/check_logfiles_x64.exe resources/scripts/x64/centreon/check_logfiles.exe
+      
       - ./build_centreon_nsclient.bat
 
       # To generate the deployment api_key :
