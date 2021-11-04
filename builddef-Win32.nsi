@@ -1,7 +1,7 @@
 ; builddef-Win32.nsi
 
 !define PRODUCT_VERSION "0.5.2.41"
-!define PACKAGE_VERSION "20211102"
+!define PACKAGE_VERSION "20000101"
 !define MSI_NSCLIENT "NSCP-0.5.2.41-Win32.msi"
 
 !define MULTIUSER_EXECUTIONLEVEL Admin
