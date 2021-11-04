@@ -104,7 +104,7 @@ jobs:
       # Build 64 bits versions
       - *perl_dir64
       - ./build_check_logfiles_64.bat
-      - ./resources/scripts/x64/centreon/check_logfiles_x64.exe --version | grep -i check_logfiles
+      - ./resources/scripts/x64/centreon/check_logfiles.exe --version | grep -i check_logfiles
       - ./build_centreon_plugins_64.bat
       - ./resources/scripts/x64/centreon/centreon_plugins.exe --version | grep -i version
       # Build NSClient++
