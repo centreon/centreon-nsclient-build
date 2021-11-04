@@ -1,6 +1,6 @@
 @ECHO OFF
 
-SET VERSION_PLUGIN=20211102
+SET VERSION_PLUGIN=20000101
 
 set PERL_INSTALL_DIR=C:\Strawberry
 SET ICO_FILE=resources\centreon.ico
@@ -80,9 +80,9 @@ CMD /C %PERL_INSTALL_DIR%\perl\site\bin\pp --lib=centreon-plugins\ ^
 -M JE ^
 -M JSON::XS ^
 -M Net::FTPSSL ^
+-M Net::LDAP ^
 -M Net::NTP ^
 -M Net::SSLeay ^
--M Net::LDAP ^
 -M Pod::Simple::Search ^
 -M Tie::RefHash::Weak ^
 -M Win32::Job ^
