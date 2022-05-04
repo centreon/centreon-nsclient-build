@@ -89,6 +89,11 @@ CMD /C %PERL_INSTALL_DIR%\perl\site\bin\pp --lib=centreon-plugins\ ^
 -M Win32::Job ^
 -M XML::LibXML::SAX ^
 -M Safe ^
+-M apps::backup::backupexec::local::plugin ^
+-M apps::backup::backupexec::local::mode::alerts ^
+-M apps::backup::backupexec::local::mode::disks ^
+-M apps::backup::backupexec::local::mode::jobs ^
+-M apps::backup::backupexec::local::mode::listdisks ^
 -M apps::backup::netbackup::local::plugin ^
 -M apps::backup::netbackup::local::mode::dedupstatus ^
 -M apps::backup::netbackup::local::mode::drivecleaning ^
