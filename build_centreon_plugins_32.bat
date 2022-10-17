@@ -212,6 +212,7 @@ CMD /C %PERL_INSTALL_DIR%\perl\site\bin\pp --lib=centreon-plugins\ ^
 -M os::windows::local::mode::pendingreboot ^
 -M os::windows::local::mode::sessions ^
 -M os::windows::local::mode::liststorages ^
+-M os::windows::local::mode::updates ^
 -M storage::dell::compellent::local::plugin ^
 -M storage::dell::compellent::local::mode::hbausage ^
 -M storage::dell::compellent::local::mode::volumeusage ^
