@@ -15,8 +15,10 @@ To use this repo, you must have:
 * a Windows Server 2K8 or above, with a x64 architecture
 * a 64bits version of Strawberry perl (http://strawberryperl.com/). The build env is tested with the version below: 
 
+Then you'll have to add `C:\Strawberry` to your **PATH** to be able to run the following commands.
+
 ```
-C:\Strawberry>perl -v
+perl -v
 
 This is perl 5, version 26, subversion 0 (v5.26.0) built for MSWin32-x64-multi-thread
 
@@ -30,27 +32,10 @@ this system using "man perl" or "perldoc perl".  If you have access to the
 Internet, point your browser at http://www.perl.org/, the Perl Home Page.
 ```
 
-* perl PAR::Packer module installed. Substitute 'C:\Strawberry' with your own perl installation dir:
-
-```C:\Strawberry>cpan install PAR::Packer```
-
-* Some additionnal perl libs installed
+* Some additionnal perl libs must be installed
 
 ```
-Authen::NTLM
-Date::Manip
-Email::Send::SMTP::Gmail
-HTTP::ProxyPAC
-IO::Socket::SSL
-JE
-JSON::XS
-Net::FTPSSL
-Net::NTP
-Net::SSLeay
-Pod::Simple::Search
-Tie::RefHash::Weak
-Win32::Job
-XML::LibXML::SAX
+cpan install PAR::Packer PAR::Packer Authen::NTLM Date::Manip Email::Send::SMTP::Gmail HTTP::ProxyPAC IO::Socket::SSL JE JSON::XS Net::FTPSSL Net::NTP Net::SSLeay Pod::Simple::Search Tie::RefHash::Weak Win32::Job XML::LibXML::SAX
 ```
 
 ## How to use it
@@ -59,12 +44,12 @@ XML::LibXML::SAX
 
 There are a lot of files in this repository, but you just have to know a few to build your own centreon-nsclient flavour. 
 
-#### build_centreon_<32/64>.bat
+#### build\_centreon\_32.bat and build\_centreon\_64.bat
 
-Those two files allow you to generate a centreon_plugins.exe to be executed on a 32 or 64 bits Windows OS. You can bring your own modifications to the following lines if needed: 
+Those two files allow you to generate a centreon\_plugins.exe to be executed on a 32 or 64 bits Windows OS. You can bring your own modifications to the following lines if needed: 
 
-- ```SET VERSION_PLUGIN=20000101```           # set the version of centreon-plugins, we recommend to follow official centreon_plugins releases (https://github.com/centreon/centreon-plugins/releases)
-- ```set PERL_INSTALL_DIR=C:\Strawberry```    # set the path to your Strawberry perl installation dir 
+- `SET VERSION_PLUGIN=20000101`           # set the version of centreon-plugins, we recommend to follow official centreon_plugins releases (https://github.com/centreon/centreon-plugins/releases)
+- `set PERL_INSTALL_DIR=C:\Strawberry`    # set the path to your Strawberry perl installation dir 
 
 If you want to add more plugins, its associated modes and dependencies, you can modify the ```CMD /C %PERL_INSTALL_DIR%\perl\site\bin\pp --lib=centreon-plugins\ ^``` command_line parameters. Only modify by adding of removing lines starting by -M. An extract below shows how we add our WSUS plugin to centreon_plugins.exe binary: 
 
@@ -76,17 +61,17 @@ If you want to add more plugins, its associated modes and dependencies, you can 
 -M apps::wsus::local::mode::serverstatistics ^
 ```
 
-#### builddef-<x64/Win32>.nsi
+#### builddef-Win32.nsi and builddef-x64.nsi
 
 NullSoft Install Script system file. It will allow you to define some properties of your installer.
 
 The three lines you may want to modify are:
 
-```!define PRODUCT_VERSION "0.5.2.41"```                # Set the NSClient++ version, in this repository we are using 0.5.2.41, do not modify unless you know what you're doing
+`!define PRODUCT_VERSION "0.5.2.41"`                # Set the NSClient++ version, in this repository we are using 0.5.2.41, do not modify unless you know what you're doing
 
-```!define PACKAGE_VERSION "20000101"```                # Set the release version, once again it's easier to stick to the official centreon-plugins release
+`!define PACKAGE_VERSION "20000101"`                # Set the release version, once again it's easier to stick to the official centreon-plugins release
 
-```!define MSI_NSCLIENT "NSCP-0.5.2.41-Win32.msi"```    # If you modified the PRODUCT version, you may want to also tune this line to reflect the associated MSI
+`!define MSI_NSCLIENT "NSCP-0.5.2.41-Win32.msi"`    # If you modified the PRODUCT version, you may want to also tune this line to reflect the associated MSI
 
 #### resources/nsclient.ini
 
