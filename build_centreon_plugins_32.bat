@@ -64,8 +64,8 @@ COPY /Y %PAR_PACKER_SRC%\myldr\Static.pm %PERL_INSTALL_DIR%\perl\site\lib\PAR\St
 CHDIR /d %~dp0
 SET PAR_VERBATIM=1
 
-CMD /C %PERL_INSTALL_DIR%\perl\site\bin\pp --lib=centreon-plugins\ ^
--o resources\scripts\win32\centreon\centreon_plugins.exe centreon-plugins\centreon_plugins.pl ^
+CMD /C %PERL_INSTALL_DIR%\perl\site\bin\pp --lib=centreon-plugins\src\ ^
+-o resources\scripts\win32\centreon\centreon_plugins.exe centreon-plugins\src\centreon_plugins.pl ^
 --unicode ^
 -X IO::Socket::INET6 ^
 --link=%PERL_INSTALL_DIR%\c\bin\libxml2-2_.dll ^
@@ -213,6 +213,8 @@ CMD /C %PERL_INSTALL_DIR%\perl\site\bin\pp --lib=centreon-plugins\ ^
 -M os::windows::local::mode::sessions ^
 -M os::windows::local::mode::liststorages ^
 -M os::windows::local::mode::updates ^
+-M os::windows::local::mode::listcertificates ^
+-M os::windows::local::mode::certificates ^
 -M storage::dell::compellent::local::plugin ^
 -M storage::dell::compellent::local::mode::hbausage ^
 -M storage::dell::compellent::local::mode::volumeusage ^
