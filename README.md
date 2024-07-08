@@ -35,23 +35,23 @@ Internet, point your browser at http://www.perl.org/, the Perl Home Page.
 * Some additionnal perl libs must be installed
 
 ```
-cpan install PAR::Packer PAR::Packer Authen::NTLM Date::Manip Email::Send::SMTP::Gmail HTTP::ProxyPAC IO::Socket::SSL JE JSON::XS Net::FTPSSL Net::NTP Net::SSLeay Pod::Simple::Search Tie::RefHash::Weak Win32::Job XML::LibXML::SAX
+cpan install PAR::Packer PAR::Packer Authen::NTLM Date::Manip Email::Send::SMTP::Gmail HTTP::ProxyPAC IO::Socket::SSL JE JSON::XS Net::FTPSSL Net::NTP Net::SSLeay Pod::Simple::Search Tie::RefHash::Weak Win32::Job XML::LibXML::SAX Win32::NetResource
 ```
 
 ## How to use it
 
 ### Quick tour of the files that matter
 
-There are a lot of files in this repository, but you just have to know a few to build your own centreon-nsclient flavour. 
+There are a lot of files in this repository, but you just have to know a few to build your own centreon-nsclient flavour.
 
-#### build\_centreon\_32.bat and build\_centreon\_64.bat
+#### build\_centreon\_plugins\_64.bat
 
-Those two files allow you to generate a centreon\_plugins.exe to be executed on a 32 or 64 bits Windows OS. You can bring your own modifications to the following lines if needed: 
+This file allows you to generate a `centreon_plugins.exe` executable binary to be executed on a 64 bits Windows OS. You can bring your own modifications to the following lines if needed:
 
 - `SET VERSION_PLUGIN=20000101`           # set the version of centreon-plugins, we recommend to follow official centreon_plugins releases (https://github.com/centreon/centreon-plugins/releases)
 - `set PERL_INSTALL_DIR=C:\Strawberry`    # set the path to your Strawberry perl installation dir 
 
-If you want to add more plugins, its associated modes and dependencies, you can modify the ```CMD /C %PERL_INSTALL_DIR%\perl\site\bin\pp --lib=centreon-plugins\ ^``` command_line parameters. Only modify by adding of removing lines starting by -M. An extract below shows how we add our WSUS plugin to centreon_plugins.exe binary: 
+If you want to add more plugins, its associated modes and dependencies, you can modify the `CMD /C %PERL_INSTALL_DIR%\perl\site\bin\pp --lib=centreon-plugins\ ^` command line parameters. Only modify by adding of removing lines starting by `-M`. An extract below shows how we add our WSUS plugin to the `centreon_plugins.exe` binary:
 
 ```
 -M apps::wsus::local::plugin ^
@@ -61,17 +61,33 @@ If you want to add more plugins, its associated modes and dependencies, you can 
 -M apps::wsus::local::mode::serverstatistics ^
 ```
 
-#### builddef-Win32.nsi and builddef-x64.nsi
+Then, to rebuild the installer with the previously built resources, just run:
+
+```
+build_centreon_plugins_64.bat
+```
+
+#### build\_check_logfiles\_64.bat
+
+Run this script to build the last tested version of [ConSol Labs'](https://labs.consol.de) [check_logfiles](https://github.com/lausser/check_logfiles).
+
+```
+build_check_logfiles_64.bat
+```
+
+#### builddef-x64.nsi
 
 NullSoft Install Script system file. It will allow you to define some properties of your installer.
 
 The three lines you may want to modify are:
 
-`!define PRODUCT_VERSION "0.5.2.41"`                # Set the NSClient++ version, in this repository we are using 0.5.2.41, do not modify unless you know what you're doing
+```
+!define PRODUCT_VERSION "0.5.2.41"                # Set the NSClient++ version, in this repository we are using 0.5.2.41, do not modify unless you know what you're doing
 
-`!define PACKAGE_VERSION "20000101"`                # Set the release version, once again it's easier to stick to the official centreon-plugins release
+!define PACKAGE_VERSION "20000101"                # Set the release version, once again it's easier to stick to the official centreon-plugins release
 
-`!define MSI_NSCLIENT "NSCP-0.5.2.41-Win32.msi"`    # If you modified the PRODUCT version, you may want to also tune this line to reflect the associated MSI
+!define MSI_NSCLIENT "NSCP-0.5.2.41-Win32.msi"    # If you modified the PRODUCT version, you may want to also tune this line to reflect the associated MSI
+```
 
 #### resources/nsclient.ini
 
@@ -84,51 +100,24 @@ Here are the step to take to build a NSClient agent:
 
 #### Clone repositories
 
-```git clone https://github.com/centreon/centreon-nsclient-build```
+```
+git clone https://github.com/centreon/centreon-nsclient-build
+```
 
 * (optionnal) Update its submodule (centreon-plugins) 
 
-:warning: Be warned that you might use some code from centreon-plugins master (=> unstable or wip code). If this is not what you want, just go to the next step. 
+:warning: Be warned that you might use some code from centreon-plugins master (=> unstable or wip code). If this is not what you want, just go to the next step.
 
 ```
 cd centreon-nsclient-build
 git submodule update --init
 ```
 
-#### build the 32bits plugin version
-
-```C:\Your\path\to\localrepo\centreon-nsclient> build_centreon_plugins_32.bat```
-
-Successful build output is like: 
-
-```
-        1 file(s) copied.
-        1 file(s) copied.
-Generating a gmake-style Makefile
-Writing Makefile for myldr
-Makefile:1080: warning: overriding recipe for target '.c.o'
-Makefile:358: warning: ignoring old recipe for target '.c.o'
-gcc -c -s -O2 -DWIN32 -D__USE_MINGW_ANSI_STDIO -DPERL_TEXTMODE_SCRIPTS -DPERL_IMPLICIT_CONTEXT -DPERL_IMPLICIT_SYS -DUSE_PERLIO -fwrapv -fno-
-E"  -DLDLIBPTHNAME=\"\" -DPARL_EXE=\"parl.exe\" -DPAR_PACKER_VERSION=\"1.039\" -s -O2 main.c
-windres -i winres/pp.rc -o ppresource.coff --input-format=rc --output-format=coff --target=pe-i386
-g++ main.o ppresource.coff -s   -s -L"C:\STRAWB~2\perl\lib\CORE" -L"C:\STRAWB~2\c\lib"  "C:\STRAWB~2\perl\lib\CORE\libperl526.a" "C:\STRAWB~2
-w64-mingw32\lib\libkernel32.a" "C:\STRAWB~2\c\i686-w64-mingw32\lib\libuser32.a" "C:\STRAWB~2\c\i686-w64-mingw32\lib\libgdi32.a" "C:\STRAWB~2\
-[...]
-[...]
-[...]
-Packing "C:\Users\ADMINI~1\AppData\Local\Temp\2\par-41646d696e6973747261746f72\cache-d9b6915b270bf0e6ae3204863f4f7c4a02de9245/f3a0f67d.dll"...
-Written as "auto/File/Glob/Glob.xs.dll"
-Press any key to continue . . .
-
-
-C:\Your\path\to\localrepo\centreon-nsclient>
-```
-
-If it succeed, you must be able to see a centreon_plugins.exe in resources\scripts\Win32 directory.
-
 #### build the 64bits plugin version
 
-```C:\Your\path\to\localrepo\centreon-nsclient> build_centreon_plugins_64.bat```
+```
+C:\Your\path\to\localrepo\centreon-nsclient> build_centreon_plugins_64.bat
+```
 
 Successful build output is like: 
 
