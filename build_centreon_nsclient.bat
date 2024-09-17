@@ -38,8 +38,10 @@ DEL /F /Q resources\resources.zip
 RMDIR /S /Q build 2> NUL
 MKDIR build
 MKDIR build\scripts
+MKDIR build\security
 XCOPY resources\scripts\x64 build\scripts /E /S /Y 2> NUL
 COPY resources\nsclient.ini build\nsclient.ini /Y 2> NUL
+COPY resources\security\nrpe_dh_2048.pem build\security\nrpe_dh_2048.pem /Y 2> NUL
 COPY resources\centreon.ico build\centreon.ico /Y 2> NUL
 
 DEL /F /Q resources\resources* 2> NUL
