@@ -1,8 +1,8 @@
 ; builddef-x64.nsi
 
-!define PRODUCT_VERSION "0.5.2.41"
-!define PACKAGE_VERSION "20240909"
-!define MSI_NSCLIENT "NSCP-0.5.2.41-x64.msi"
+!define PRODUCT_VERSION "0.11.8"
+!define PACKAGE_VERSION "20260200"
+!define MSI_NSCLIENT "NSCP-0.11.8-x64.msi"
 
 !define MULTIUSER_EXECUTIONLEVEL Admin
 !include MultiUser.nsh
