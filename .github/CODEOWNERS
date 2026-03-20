@@ -1,7 +1,11 @@
 *                       @centreon/owners-connectors
 
-.github/**              @centreon/owners-pipelines
+# Pipelines Codeowners rules
+.github/**                    @centreon/owners-pipelines
+.yamlfix.toml                 @centreon/owners-pipelines
 
-.gitleaks.toml          @centreon/owners-security
-.gitleaksignore         @centreon/owners-security
-**/secu-*.yml           @centreon/owners-security
+# Security Codeowners rules
+.gitleaks.toml                @centreon/owners-security
+.gitleaksignore               @centreon/owners-security
+.githooks/pre-commit          @centreon/owners-security
+**/secu-*.yml                 @centreon/owners-security
