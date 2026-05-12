@@ -79,6 +79,7 @@ CMD /C %PERL_INSTALL_DIR%\perl\site\bin\pp --lib=centreon-plugins\src\ ^
 -M IO::Socket::SSL ^
 -M JE ^
 -M JSON::XS ^
+-M Net::Curl::Easy ^
 -M Net::FTPSSL ^
 -M Net::NTP ^
 -M Net::SSLeay ^
